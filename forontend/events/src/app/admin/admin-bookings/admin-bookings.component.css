@@ -1,0 +1,337 @@
+.admin-bookings-container {
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  background: rgba(45, 45, 61, 0.98);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header h1 {
+  margin: 0;
+  color: #bb86fc;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.header button {
+  height: 42px;
+  font-size: 16px;
+  padding: 0 24px;
+  background: rgba(187, 134, 252, 0.1);
+  border: 1px solid rgba(187, 134, 252, 0.2);
+  color: #bb86fc;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.header button:hover {
+  background: rgba(187, 134, 252, 0.2);
+  border-color: rgba(187, 134, 252, 0.3);
+  transform: translateY(-1px);
+}
+
+.header button mat-icon {
+  margin-right: 8px;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: rgba(45, 45, 61, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 24px;
+  padding: 4px;
+}
+
+table {
+  width: 100%;
+  background: transparent;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.mat-mdc-row {
+  transition: background-color 0.2s ease;
+}
+
+.mat-mdc-row:hover {
+  background: rgba(187, 134, 252, 0.15);
+}
+
+.mat-mdc-header-row {
+  background: rgba(30, 30, 40, 0.95);
+  height: 56px !important;
+}
+
+.mat-mdc-header-cell {
+  color: #bb86fc;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px !important;
+  border-bottom: 2px solid rgba(187, 134, 252, 0.2);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.mat-mdc-cell {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+  padding: 20px 16px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 1.5;
+}
+
+/* Column specific styles */
+.mat-column-id {
+  width: 80px;
+  padding-right: 24px !important;
+  font-weight: 500;
+}
+
+.mat-column-eventTitle {
+  min-width: 250px;
+  font-weight: 500;
+}
+
+.mat-column-userName {
+  min-width: 180px;
+  font-weight: 500;
+}
+
+.mat-column-status {
+  min-width: 130px;
+}
+
+.mat-column-ticketCount {
+  min-width: 120px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mat-column-totalPrice {
+  min-width: 140px;
+  text-align: right;
+  font-weight: 500;
+}
+
+.mat-column-bookingDate {
+  min-width: 160px;
+}
+
+.mat-column-actions {
+  width: 140px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.action-buttons button {
+  min-width: 36px;
+  height: 36px;
+  line-height: 36px;
+  padding: 0;
+  border-radius: 8px;
+  background: rgba(187, 134, 252, 0.1);
+  border: 1px solid rgba(187, 134, 252, 0.2);
+  transition: all 0.2s ease;
+}
+
+.action-buttons button:hover {
+  background: rgba(187, 134, 252, 0.2);
+  border-color: rgba(187, 134, 252, 0.3);
+  transform: translateY(-1px);
+}
+
+.action-buttons button mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #bb86fc;
+}
+
+/* Edit button specific styles */
+.action-buttons button.edit-btn {
+  color: #bb86fc;
+}
+
+/* Delete button specific styles */
+.action-buttons button.delete-btn {
+  color: #ff4081;
+  background: rgba(255, 64, 129, 0.1);
+  border-color: rgba(255, 64, 129, 0.2);
+}
+
+.action-buttons button.delete-btn:hover {
+  background: rgba(255, 64, 129, 0.2);
+  border-color: rgba(255, 64, 129, 0.3);
+}
+
+.action-buttons button.delete-btn mat-icon {
+  color: #ff4081;
+}
+
+/* View button specific styles */
+.action-buttons button.view-btn {
+  color: #03dac6;
+  background: rgba(3, 218, 198, 0.1);
+  border-color: rgba(3, 218, 198, 0.2);
+}
+
+.action-buttons button.view-btn:hover {
+  background: rgba(3, 218, 198, 0.2);
+  border-color: rgba(3, 218, 198, 0.3);
+}
+
+.action-buttons button.view-btn mat-icon {
+  color: #03dac6;
+}
+
+/* Status chip styles */
+.mat-mdc-chip {
+  min-height: 28px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px;
+  padding: 0 12px !important;
+}
+
+.mat-chip.confirmed {
+  color: #4caf50;
+  background: rgba(76, 175, 80, 0.15) !important;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.mat-chip.pending {
+  color: #ff9800;
+  background: rgba(255, 152, 0, 0.15) !important;
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.mat-chip.cancelled {
+  color: #f44336;
+  background: rgba(244, 67, 54, 0.15) !important;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.mobile-label {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .mat-mdc-table {
+    border: 0;
+    vertical-align: middle;
+  }
+
+  .mat-mdc-table .mat-mdc-header-row {
+    display: none;
+  }
+
+  .mat-mdc-table .mat-mdc-row {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: rgba(30, 30, 40, 0.95);
+    border-radius: 8px;
+    border: 1px solid rgba(187, 134, 252, 0.2);
+  }
+
+  .mat-mdc-table .mat-mdc-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 32px;
+    margin: 8px 0;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 15px;
+  }
+
+  .mat-mdc-table .mat-mdc-cell:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-label {
+    display: inline-block;
+    font-weight: 500;
+    color: #bb86fc;
+    margin-right: 16px;
+    min-width: 100px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .action-buttons {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .action-buttons button {
+    min-width: 42px;
+    height: 42px;
+    line-height: 42px;
+  }
+
+  .action-buttons button mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  [class*="mat-column-"] {
+    width: 100% !important;
+    min-width: unset !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-bookings-container {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    margin-bottom: 20px;
+    padding: 16px;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+
+  .header button {
+    width: 100%;
+  }
+
+  .mat-mdc-table .mat-mdc-row {
+    margin-bottom: 16px;
+    padding: 12px;
+  }
+
+  .mobile-label {
+    min-width: 90px;
+    font-size: 13px;
+  }
+} 

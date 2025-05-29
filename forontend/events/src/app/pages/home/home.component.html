@@ -1,0 +1,77 @@
+<div class="home-container">
+  <!-- Search and Filter Section -->
+  <div class="search-section">
+    <mat-card>
+      <mat-card-content>
+        <div class="filters">
+          <mat-form-field appearance="outline">
+            <mat-label>Search Events</mat-label>
+            <input matInput [(ngModel)]="searchQuery" placeholder="Search by title or description">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select [(ngModel)]="selectedCategory">
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{category}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Select Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <button mat-raised-button color="accent" (click)="clearFilters()">
+            Clear Filters
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Events Grid -->
+  <div class="events-grid">
+    <mat-card *ngFor="let event of filterEvents()" class="event-card">
+      <img mat-card-image [src]="event.image" [alt]="event.title">
+      <mat-card-content>
+        <div class="event-header">
+          <h2>{{event.title}}</h2>
+          <mat-chip-set>
+            <mat-chip>{{event.category}}</mat-chip>
+          </mat-chip-set>
+        </div>
+        
+        <div class="event-details">
+          <p class="date">
+            <mat-icon>calendar_today</mat-icon>
+            {{event.date | date:'mediumDate'}}
+          </p>
+          <p class="location">
+            <mat-icon>location_on</mat-icon>
+            {{event.location}}
+          </p>
+          <p class="price">
+            <mat-icon>attach_money</mat-icon>
+            {{event.price | currency}}
+          </p>
+        </div>
+
+        <p class="description">{{event.description}}</p>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="['/event', event.id]">
+          View Details
+        </button>
+        <button mat-raised-button color="accent">
+          Book Now
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div> 
