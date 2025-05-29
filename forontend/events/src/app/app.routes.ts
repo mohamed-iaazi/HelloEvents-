@@ -1,29 +1,43 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { HomeComponent } from './pages/home/home.component';
-import { EventDetailsComponent } from './pages/event-details/event-details.component';
-import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { AdminEventsComponent } from './admin/admin-events/admin-events.component';
-import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
-import { AdminBookingsComponent } from './admin/admin-bookings/admin-bookings.component';
-import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { authGuard } from './core/guards/auth.guard';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'event/:id', component: EventDetailsComponent },
   { 
-    path: 'admin',
-    component: AdminDashboardComponent,
-    children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AdminHomeComponent },
-      { path: 'events', component: AdminEventsComponent },
-      { path: 'users', component: AdminUsersComponent },
-      { path: 'bookings', component: AdminBookingsComponent }
-    ]
+    path: '', 
+    redirectTo: '/events', 
+    pathMatch: 'full' 
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./components/auth/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./components/auth/register/register.component').then(m => m.RegisterComponent)
+  },
+  {
+    path: 'events',
+    loadComponent: () => import('./components/events/event-list/event-list.component').then(m => m.EventListComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'events/:id',
+    loadComponent: () => import('./components/events/event-details/event-details.component').then(m => m.EventDetailsComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./components/admin/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    canActivate: [authGuard],
+    data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/events'
   }
 ];
