@@ -37,4 +37,10 @@ public class AuthController {
         AuthResponse response = authenticationService.authenticate(request);
         return ResponseEntity.ok(response);
     }
+
+
+    @GetMapping("/")
+    public String home() {
+        return "found" ;
+    }
 }

@@ -65,6 +65,7 @@ public class AuthService {
             throw new RuntimeException("Invalid username or password");
         }
 
+
         // Load user from database
         User user = userRepository.findByUserName(request.getUserName())
                 .orElseThrow(() -> new RuntimeException("User not found"));
