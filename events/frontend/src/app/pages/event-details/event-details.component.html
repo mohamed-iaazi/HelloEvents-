@@ -1,0 +1,72 @@
+<div class="event-details-container" *ngIf="event">
+  <div class="back-button">
+    <button mat-icon-button (click)="goBack()" matTooltip="Go back">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+
+  <mat-card class="event-card">
+    <img [src]="event.image" [alt]="event.title" class="event-image">
+    
+    <mat-card-content>
+      <div class="event-header">
+        <h1>{{event.title}}</h1>
+        <mat-chip-set>
+          <mat-chip>{{event.category}}</mat-chip>
+        </mat-chip-set>
+      </div>
+
+      <div class="event-info">
+        <div class="info-item">
+          <mat-icon>calendar_today</mat-icon>
+          <span>{{event.date | date:'fullDate'}}</span>
+        </div>
+        
+        <div class="info-item">
+          <mat-icon>location_on</mat-icon>
+          <span>{{event.location}}</span>
+        </div>
+        
+        <div class="info-item">
+          <mat-icon>attach_money</mat-icon>
+          <span>{{event.price | currency}}</span>
+        </div>
+
+        <div class="info-item">
+          <mat-icon>people</mat-icon>
+          <span>{{event.availableTickets}} tickets available</span>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <h2>About This Event</h2>
+        <p>{{event.description}}</p>
+      </div>
+
+      <div class="booking-section">
+        <h2>Book Your Tickets</h2>
+        <div class="availability-info">
+          <mat-chip [color]="getAvailabilityColor()" selected>
+            {{event.availableTickets}} tickets left
+          </mat-chip>
+        </div>
+        
+        <div class="booking-actions">
+          <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="bookEvent()"
+            [disabled]="!event.availableTickets">
+            <mat-icon>confirmation_number</mat-icon>
+            Book Now
+          </button>
+          
+          <button mat-stroked-button color="accent">
+            <mat-icon>share</mat-icon>
+            Share Event
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 
