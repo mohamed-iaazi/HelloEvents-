@@ -4,22 +4,22 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface Event {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   date: Date;
   location: string;
   category: string;
   price: number;
+  capacity: number;
   availableTickets: number;
-  imageUrl: string;
+  image: string;
+  version?: number;
 }
 
 export interface EventQueryParams {
   category?: string;
   search?: string;
-  fromDate?: Date;
-  toDate?: Date;
   page?: number;
   size?: number;
 }
@@ -28,11 +28,11 @@ export interface EventQueryParams {
   providedIn: 'root'
 })
 export class EventService {
-  private readonly apiUrl = `${environment.apiUrl}/events`;
+  private readonly apiUrl = `${environment.apiUrl}/api/events`;
 
   constructor(private http: HttpClient) {}
 
-  getAllEvents(params?: EventQueryParams): Observable<{ content: Event[]; totalElements: number }> {
+  getAllEvents(params?: EventQueryParams): Observable<Event[]> {
     let httpParams = new HttpParams();
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
@@ -41,7 +41,7 @@ export class EventService {
         }
       });
     }
-    return this.http.get<{ content: Event[]; totalElements: number }>(this.apiUrl, { params: httpParams });
+    return this.http.get<Event[]>(this.apiUrl, { params: httpParams });
   }
 
   getEventById(id: number): Observable<Event> {
@@ -60,7 +60,9 @@ export class EventService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  bookTickets(eventId: number, quantity: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${eventId}/book`, { quantity });
+  bookEvent(eventId: number, tickets: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${eventId}/book`, null, {
+      params: new HttpParams().set('tickets', tickets.toString())
+    });
   }
 } 

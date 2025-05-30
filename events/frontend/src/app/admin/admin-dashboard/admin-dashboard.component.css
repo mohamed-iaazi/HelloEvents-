@@ -5,11 +5,13 @@
   left: 0;
   right: 0;
   background: #1a1a1a;
+  height: 100vh;
 }
 
 .admin-sidenav {
   width: 250px;
-  background: rgba(45, 45, 61, 0.98);
+  background: rgba(45, 45, 61, 0.9);
+  backdrop-filter: blur(10px);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -23,38 +25,55 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1a1a1a;
+  background: #121212;
 }
 
 .content-wrapper {
-  padding: 20px;
+  padding: 2rem;
   overflow-y: auto;
   flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .mobile-toolbar {
-  background: rgba(45, 45, 61, 0.98);
+  background: rgba(45, 45, 61, 0.9);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .toolbar-title {
-  margin-left: 16px;
-  color: #bb86fc;
+  margin-left: 1rem;
+  color: #ffffff;
+}
+
+mat-nav-list {
+  padding-top: 0;
 }
 
 mat-nav-list a {
   color: rgba(255, 255, 255, 0.87);
-  margin: 8px 0;
+  transition: all 0.2s ease;
 }
 
-mat-nav-list a.active {
+mat-nav-list a:hover {
   background: rgba(187, 134, 252, 0.1);
   color: #bb86fc;
 }
 
-mat-nav-list mat-icon {
-  margin-right: 12px;
+mat-nav-list a.active {
+  background: rgba(187, 134, 252, 0.2);
   color: #bb86fc;
+}
+
+mat-nav-list mat-icon {
+  color: #bb86fc;
+  margin-right: 1rem;
+}
+
+mat-divider {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 1rem 0;
 }
 
 .stats-grid {
@@ -155,7 +174,7 @@ mat-tab-group {
   }
 
   .content-wrapper {
-    padding: 10px;
+    padding: 1rem;
   }
 
   .mat-column-actions {
@@ -197,4 +216,14 @@ mat-tab-group {
 
 .toolbar-spacer {
   flex: 1 1 auto;
+}
+
+.mobile-toolbar button {
+  color: #bb86fc;
+  transition: all 0.2s ease;
+}
+
+.mobile-toolbar button:hover {
+  background: rgba(187, 134, 252, 0.1);
+  transform: translateY(-2px);
 } 

@@ -2,6 +2,27 @@
   padding: 2rem;
   max-width: 1000px;
   margin: 0 auto;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1;
+}
+
+.back-button button {
+  background: rgba(45, 45, 61, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #bb86fc;
+}
+
+.back-button button:hover {
+  background: rgba(187, 134, 252, 0.1);
+  transform: translateX(-2px);
+  transition: all 0.2s ease;
 }
 
 .event-card {

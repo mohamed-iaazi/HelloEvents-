@@ -14,12 +14,11 @@
         <mat-icon>logout</mat-icon>
       </button>
     </ng-container>
-    <ng-template #loginButton>
-      <button mat-button routerLink="/login">
-        <mat-icon>login</mat-icon>
-        Login
+    <ng-container *ngIf="!isLoggedIn()">
+      <button mat-icon-button routerLink="/login" matTooltip="Login">
+        <mat-icon>person</mat-icon>
       </button>
-    </ng-template>
+    </ng-container>
   </mat-toolbar>
 
   <!-- Search and Filter Section -->

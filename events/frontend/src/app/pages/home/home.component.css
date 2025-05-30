@@ -130,9 +130,22 @@ mat-chip-set {
 }
 
 .home-toolbar {
-  margin-bottom: 20px;
+  background: rgba(45, 45, 61, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
 }
 
 .toolbar-spacer {
   flex: 1 1 auto;
+}
+
+.home-toolbar button {
+  color: #bb86fc;
+  transition: all 0.2s ease;
+}
+
+.home-toolbar button:hover {
+  background: rgba(187, 134, 252, 0.1);
+  transform: translateY(-2px);
 } 

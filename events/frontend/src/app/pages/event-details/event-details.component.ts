@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Event } from '../../interfaces/event.interface';
 
 @Component({
@@ -21,7 +22,8 @@ import { Event } from '../../interfaces/event.interface';
     MatIconModule,
     MatChipsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ]
 })
 export class EventDetailsComponent implements OnInit {
@@ -44,6 +46,7 @@ export class EventDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
@@ -55,6 +58,10 @@ export class EventDetailsComponent implements OnInit {
       const id = +params['id'];
       this.event = this.tempEvent; // Temporary: just using our mock data
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/home']);
   }
 
   bookEvent() {

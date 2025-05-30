@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Event } from '../../interfaces/event.interface';
+import { Event, EventService } from '../../services/event.service';
 import { CreateEventDialogComponent } from './create-event-dialog/create-event-dialog.component';
 
 @Component({
@@ -25,33 +25,7 @@ import { CreateEventDialogComponent } from './create-event-dialog/create-event-d
   styleUrls: ['./admin-events.component.css']
 })
 export class AdminEventsComponent implements OnInit {
-  events: Event[] = [
-    {
-      id: 1,
-      title: 'Summer Music Festival',
-      date: new Date('2024-07-15'),
-      location: 'Central Park',
-      category: 'Music',
-      price: 49.99,
-      image: 'assets/images/music-festival.jpg',
-      description: 'Join us for an amazing summer music festival!',
-      capacity: 1000,
-      availableTickets: 750
-    },
-    {
-      id: 2,
-      title: 'Tech Conference 2024',
-      date: new Date('2024-06-20'),
-      location: 'Convention Center',
-      category: 'Technology',
-      price: 299.99,
-      image: 'assets/images/tech-conf.jpg',
-      description: 'Explore the latest innovations in technology.',
-      capacity: 500,
-      availableTickets: 300
-    }
-  ];
-
+  events: Event[] = [];
   displayedColumns: string[] = [
     'id',
     'title',
@@ -65,12 +39,25 @@ export class AdminEventsComponent implements OnInit {
   ];
 
   constructor(
+    private eventService: EventService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    // In a real app, fetch events from a service
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    this.eventService.getAllEvents().subscribe({
+      next: (events) => {
+        this.events = events;
+      },
+      error: (error) => {
+        this.snackBar.open('Error loading events', 'Close', { duration: 3000 });
+        console.error('Error loading events:', error);
+      }
+    });
   }
 
   createEvent(): void {
@@ -81,34 +68,60 @@ export class AdminEventsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // In a real app, this would be handled by a service
-        this.events = [...this.events, result];
-        this.snackBar.open('Event created successfully', 'Close', {
-          duration: 3000
+        this.eventService.createEvent(result).subscribe({
+          next: () => {
+            this.loadEvents();
+            this.snackBar.open('Event created successfully', 'Close', { duration: 3000 });
+          },
+          error: (error) => {
+            this.snackBar.open('Error creating event', 'Close', { duration: 3000 });
+            console.error('Error creating event:', error);
+          }
         });
       }
     });
   }
 
   editEvent(event: Event): void {
-    // TODO: Implement edit dialog
-    this.snackBar.open('Edit event coming soon!', 'Close', {
-      duration: 3000
+    const dialogRef = this.dialog.open(CreateEventDialogComponent, {
+      width: '600px',
+      data: event,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.eventService.updateEvent(event.id!, result).subscribe({
+          next: () => {
+            this.loadEvents();
+            this.snackBar.open('Event updated successfully', 'Close', { duration: 3000 });
+          },
+          error: (error) => {
+            this.snackBar.open('Error updating event', 'Close', { duration: 3000 });
+            console.error('Error updating event:', error);
+          }
+        });
+      }
     });
   }
 
   deleteEvent(eventId: number): void {
-    // In a real app, this would call an API
-    this.events = this.events.filter(e => e.id !== eventId);
-    this.snackBar.open('Event deleted successfully', 'Close', {
-      duration: 3000
-    });
+    if (confirm('Are you sure you want to delete this event?')) {
+      this.eventService.deleteEvent(eventId).subscribe({
+        next: () => {
+          this.loadEvents();
+          this.snackBar.open('Event deleted successfully', 'Close', { duration: 3000 });
+        },
+        error: (error) => {
+          this.snackBar.open('Error deleting event', 'Close', { duration: 3000 });
+          console.error('Error deleting event:', error);
+        }
+      });
+    }
   }
 
   viewDetails(event: Event): void {
     // TODO: Implement view details dialog
-    this.snackBar.open('View details coming soon!', 'Close', {
-      duration: 3000
-    });
+    this.snackBar.open('View details coming soon!', 'Close', { duration: 3000 });
   }
 } 
